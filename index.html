@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./assets/css/styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <title>Учебное задание 10.11.1 (HW-03)</title>
+</head>
+<body>
+    <div class="menu-btn">
+        <i class="fas fa-bars"></i>
+    </div>
+    <div class="side-bar active">
+        <header>
+            <div class="close-btn">
+                <i class="fas fa-times"></i>
+            </div>
+            <img src="./assets/images/farmer.png" alt="Тот самый фермер">
+            <h1>Алгоритмы</h1>
+        </header>
+
+        <div class="menu">
+
+            <div class="item">
+                <a href="#"><i class="fas fa-desktop"></i>Dashboard</a>
+            </div>
+            
+            <div class="item">
+                <a href="#" class="sub-btn" id="sub-btn-1"><i class="fas fa-table"></i>Tables
+                    <i class="fas fa-angle-down dropdown"></i>
+                </a>
+                <div class="sub-menu" id="sub-menu-1">
+                    <a href="#" class="sub-item">sub item 1</a>
+                    <a href="#" class="sub-item">sub item 2</a>
+                    <a href="#" class="sub-item">sub item 3</a>
+                </div>
+            </div>
+            
+            <div class="item">
+                <a href="#"><i class="fas fa-th"></i>Forms</a>
+            </div>
+            
+            <div class="item">
+                <a href="#" class="sub-btn" id="sub-btn-2"><i class="fas fa-cog"></i>Settings
+                    <i class="fas fa-angle-down dropdown"></i>
+                </a>
+                <div class="sub-menu" id="sub-menu-2">
+                    <a href="#" class="sub-item">sub item 1</a>
+                    <a href="#" class="sub-item">sub item 2</a>
+                    <a href="#" class="sub-item">sub item 3</a>
+                </div>
+            </div>
+            
+            <div class="item">
+                <a href="#"><i class="fas fa-info-circle"></i>About</a>
+            </div>
+        </div>
+    
+    </div>
+
+    
+    <script type="module" src="./assets/js/script.js"></script>
+</body>
+</html>
