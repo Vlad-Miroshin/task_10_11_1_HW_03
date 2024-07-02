@@ -103,3 +103,15 @@ header h1 {
 .side-bar.active {
     left: 0;
 }
+
+.side-bar::-webkit-scrollbar {
+    width: 0;
+}
+
+.item .sub-menu a {
+    padding-left: 80px;
+}
+
+.rotate {
+    transform: rotate(180deg);
+}
