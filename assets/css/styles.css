@@ -18,7 +18,7 @@ body {
 .side-bar {
     background: #1b1a1b;
     width: 15rem;
-    left: -15rem;
+    left: 0;
     height: 100vh;
     position: fixed;
     top: 0;
@@ -46,15 +46,6 @@ header h1 {
     padding-bottom: 13px;
     font-family: sans-serif;
     letter-spacing: 2px;
-}
-
-.close-btn {
-    position: absolute;
-    color: #fff;
-    font-size: 23px;
-    right: 0;
-    margin: 15px;
-    cursor: pointer;
 }
 
 .menu {
@@ -90,18 +81,6 @@ header h1 {
 .item .sub-menu {
     background: #262627;
     display: none;
-}
-
-.menu-btn {
-    position: absolute;
-    color: rgb(0, 0, 0);
-    font-size: 35px;
-    cursor: pointer;
-    margin: 25px;
-}
-
-.side-bar.active {
-    left: 0;
 }
 
 .side-bar::-webkit-scrollbar {
