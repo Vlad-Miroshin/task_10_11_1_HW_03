@@ -1,18 +1,12 @@
-const subBtn_1 = document.querySelector("#sub-btn-1");
-const subMenu_1 = document.querySelector("#sub-menu-1");
-const subBtn_2 = document.querySelector("#sub-btn-2");
-const subMenu_2 = document.querySelector("#sub-menu-2");
+const sub_btn = document.querySelectorAll(".sub-btn");
 
-subBtn_1.addEventListener('click', function(e) {
-    toggle_display(subMenu_1);
-    this.querySelector('.dropdown').classList.toggle('rotate');
-}); 
+sub_btn.forEach((btn)=>{
+    btn.addEventListener('click', function(e) {
+        toggle_display(this.closest('.item').querySelector('.sub-menu'));
+        this.querySelector('.dropdown').classList.toggle('rotate');
+    });
+});
 
-subBtn_2.addEventListener('click', function(e) {
-    toggle_display(subMenu_2);
-
-    this.querySelector('.dropdown').classList.toggle('rotate');
-}); 
 
 function toggle_display(elem) {
     if (elem.style.display === "" || elem.style.display === "none")
@@ -21,3 +15,22 @@ function toggle_display(elem) {
         elem.style.display = 'none';
 }
 
+
+
+// алгоритм перетасовки Фишера-Йейтса
+function shuffleArray(arr) {
+    let currentIndex = arr.length;
+    let randomIndex;
+  
+    while (currentIndex !== 0) {
+      randomIndex = Math.floor(Math.random() * currentIndex);
+      currentIndex--;
+  
+      [arr[currentIndex], arr[randomIndex]] = [
+        arr[randomIndex],
+        arr[currentIndex],
+      ];
+    }
+  
+    return arr;
+  }
