@@ -9,10 +9,11 @@ document.addEventListener('DOMContentLoaded', ()=> {
   }
 
   onclick('#act-shuffle', () => act_shuffle());
-  onclick('#act-renew', () => act_restore());
+  onclick('#act-restore', () => act_restore());
   onclick('#act-filter-apply', () => act_filter_apply());
   onclick('#act-filter-clear', () => act_filter_clear());
   onclick('#act-sort', () => act_sort());
+  onclick('#act-add', () => act_add());
 });
 
 sub_btn.forEach((btn)=>{
@@ -65,7 +66,16 @@ function act_sort() {
   show_fruits();
 }
 
+function act_add() {
+  let rnd = getRandomItem(known_fruits);
+  fruits.push(rnd);
 
+  show_fruits();
+}
+
+function getRandomItem(items) {
+  return items[Math.round(Math.random() * (items.length - 1))];
+}
 
 function show(fruits) {
 
@@ -100,7 +110,6 @@ function show(fruits) {
 
       card_list.appendChild(card);
     }
-
 }
 
 function getColorClass(color) {

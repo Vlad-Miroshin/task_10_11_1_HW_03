@@ -4,6 +4,8 @@
     --main-color-gray: #636b6f;
     --button-inactive-color: rgb(215, 247, 219);
     --button-active-color: rgb(180, 245, 188);
+    --card-color-white: #dbdbdd;
+    --card-color-black: #4f4f52;
 }
 
 * {
@@ -67,7 +69,6 @@ header h1 {
 
 .menu .item {
     position: relative;
-    cursor: pointer;
 }
 
 .menu .item a {
@@ -75,8 +76,9 @@ header h1 {
     font-size: 16px;
     text-decoration: none;
     display: block;
-    padding: 5px 30px;
+    padding: 5px 15px;
     line-height: 60px;
+    cursor: pointer;
 }
 
 .item i {
@@ -95,10 +97,16 @@ header h1 {
     display: none;
 }
 
+.item .sub-menu a {
+    line-height: 30px;
+}
 
+.item .sub-menu div {
+    padding-left: 40px;
+}
 
 .item .sub-menu a {
-    padding-left: 80px;
+    padding-left: 40px;
 }
 
 .rotate {
@@ -160,40 +168,40 @@ main {
 
 ._violet {
     background-color: violet;
-    color: #4f4f52;
+    color: var(--card-color-black);
 }
 
 ._red {
     background-color: red;
-    color: #dbdbdd;
+    color: var(--card-color-white);
 }
 
 ._green {
     background-color: green;
-    color:  #dbdbdd;
+    color:  var(--card-color-white);
 }
 
 ._light_green {
     background-color: lightGreen;
-    color:  #4f4f52;
+    color:  var(--card-color-black);
 }
 
 ._orange {
     background-color: orange;
-    color: #4f4f52;
+    color: var(--card-color-black);
 }
 
 ._brown {
     background-color: brown;
-    color: #dbdbdd;
+    color: var(--card-color-white);
 }
 
 ._purple {
     background-color: purple;
-    color: #dbdbdd;
+    color: var(--card-color-white);
 }
 
 ._beige {
     background-color: beige;
-    color: #4f4f52;
+    color: var(--card-color-black);
 }
