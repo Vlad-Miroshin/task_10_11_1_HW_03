@@ -1,3 +1,11 @@
+:root {
+    --main-font-family: "Roboto", sans-serif;
+    --main-font-size: 16px;
+    --main-color-gray: #636b6f;
+    --button-inactive-color: rgb(215, 247, 219);
+    --button-active-color: rgb(180, 245, 188);
+}
+
 * {
     margin: 0;
     padding: 0;
@@ -8,7 +16,6 @@
 body {
     min-height: 100vh;
     background-color: #fff;
-    color: #fff;
     background-size: cover;
     background-position: center;
     font-size: 16px;
@@ -17,6 +24,7 @@ body {
 
 .side-bar {
     background: #1b1a1b;
+    color: #fff;
     width: 15rem;
     left: 0;
     height: 100vh;
@@ -25,6 +33,10 @@ body {
     overflow-y: auto;
     transition: .6 ease;
     transition-property: left;
+}
+
+.side-bar::-webkit-scrollbar {
+    width: 0;
 }
 
 header {
@@ -83,9 +95,7 @@ header h1 {
     display: none;
 }
 
-.side-bar::-webkit-scrollbar {
-    width: 0;
-}
+
 
 .item .sub-menu a {
     padding-left: 80px;
@@ -93,4 +103,97 @@ header h1 {
 
 .rotate {
     transform: rotate(180deg);
+}
+
+.footer {
+    /* padding-top: 4rem; */
+    padding-bottom: 4rem;
+    text-align: center;
+}
+
+.footer a {
+    text-decoration: none;
+    color: inherit;
+}
+
+.copyright {
+    margin-top: 7rem;
+    font-size: .75rem;
+    color: var(--main-color-gray);
+}
+
+main {
+    /* height: 100vh; */
+    margin-left: 16rem;
+    padding: 1rem 2rem;
+}
+
+.card-list {
+    display: flex;
+    flex-direction: row;
+    flex-flow: row wrap;
+    /* justify-content: ; */
+    gap: 1rem;
+}
+
+.card {
+    display: flex;
+    flex-direction: column;
+    /* gap: 1rem; */
+    color: var(--main-color-gray);
+    background-color: var(--button-inactive-color);
+    /* text-align: center; */
+    text-wrap: wrap;
+    padding: 1rem;
+    /* font-size: 1rem; */
+    /* font-weight: 600; */
+    max-width: 15rem;
+    border-radius: .75rem;
+    border: 1px solid #33363a;
+    box-shadow: 5px 3px 10px rgba(0, 0, 0, 0.6);
+}
+
+._yellow {
+    background-color: yellow;
+    color: #4f4f52;
+}
+
+._violet {
+    background-color: violet;
+    color: #4f4f52;
+}
+
+._red {
+    background-color: red;
+    color: #dbdbdd;
+}
+
+._green {
+    background-color: green;
+    color:  #dbdbdd;
+}
+
+._light_green {
+    background-color: lightGreen;
+    color:  #4f4f52;
+}
+
+._orange {
+    background-color: orange;
+    color: #4f4f52;
+}
+
+._brown {
+    background-color: brown;
+    color: #dbdbdd;
+}
+
+._purple {
+    background-color: purple;
+    color: #dbdbdd;
+}
+
+._beige {
+    background-color: beige;
+    color: #4f4f52;
 }

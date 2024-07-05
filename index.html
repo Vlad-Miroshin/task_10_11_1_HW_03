@@ -11,7 +11,7 @@
     <title>Учебное задание 10.11.1 (HW-03)</title>
 </head>
 <body>
-    <div class="side-bar active">
+    <aside class="side-bar">
         <header>
             <img src="./assets/images/farmer.png" alt="Тот самый фермер">
             <h1>Алгоритмы</h1>
@@ -19,44 +19,70 @@
 
         <div class="menu">
 
-            <div class="item">
-                <a href="#"><i class="fas fa-desktop"></i>Dashboard</a>
+            <div class="item" id="act-shuffle">
+                <a href="#"><i class="fas fa-refresh"></i>Перемешать</a>
             </div>
             
             <div class="item">
                 <a href="#" class="sub-btn">
-                    <i class="fas fa-table"></i>Tables
+                    <i class="fas fa-filter"></i>Фильтр
                     <i class="fas fa-angle-down dropdown"></i>
                 </a>
                 <div class="sub-menu">
-                    <a href="#" class="sub-item">sub item 1</a>
-                    <a href="#" class="sub-item">sub item 2</a>
-                    <a href="#" class="sub-item">sub item 3</a>
+                    <div class="sub-item">
+                        <input type="text">        
+                        <input type="text">        
+                    </div>         
+                    <a href="#" class="sub-item" id="act-filter-apply">Применить</a>
+                    <a href="#" class="sub-item" id="act-filter-clear">Отмена</a>
                 </div>
-            </div>
-            
-            <div class="item">
-                <a href="#"><i class="fas fa-th"></i>Forms</a>
             </div>
             
             <div class="item">
                 <a href="#" class="sub-btn">
-                    <i class="fas fa-cog"></i>Settings
+                    <i class="fas fa-sort"></i>Сортировка
                     <i class="fas fa-angle-down dropdown"></i>
                 </a>
                 <div class="sub-menu">
-                    <a href="#" class="sub-item">sub item 1</a>
-                    <a href="#" class="sub-item">sub item 2</a>
-                    <a href="#" class="sub-item">sub item 3</a>
+                    <a href="#" class="sub-item">Выбрать</a>
+                    <a href="#" class="sub-item" id="act-sort">Сортировать</a>
                 </div>
             </div>
             
             <div class="item">
-                <a href="#"><i class="fas fa-info-circle"></i>About</a>
+                <a href="#" class="sub-btn">
+                    <i class="fas fa-add"></i>Добавить
+                    <i class="fas fa-angle-down dropdown"></i>
+                </a>
+                <div class="sub-menu">
+                    <div class="sub-item">
+                        <input type="text">        
+                        <input type="text">        
+                        <input type="text">        
+                    </div>         
+                    <a href="#" class="sub-item">Добавить</a>
+                </div>
+            </div>
+            
+            <div class="item" id="act-renew">
+                <a href="#"><i class="fas fa-file-text"></i>Заново</a>
             </div>
         </div>
     
-    </div>
+    </aside>
+
+    <main>
+        <div class="card-list">
+
+        </div>
+
+        <div class="footer">
+            <div class="copyright">
+                &copy;&nbsp;<a href="https://github.com/Vlad-Miroshin">Владислав Мирошин</a>, 2024. Поток PHPPRO_22 <a href="https://skillfactory.ru/">Skillfactory</a>.
+            </div>
+        </div>
+
+    </main>
 
     
     <script type="module" src="./assets/js/script.js"></script>
