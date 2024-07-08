@@ -31,10 +31,11 @@ sub_btn.forEach((btn)=>{
 
 
 const known_fruits = await parser("./assets/js/data.json");
+
 let fruits = known_fruits.slice();
 let currentAlgoIndex = 0;
 let currentAlgo = known_algo[currentAlgoIndex];
-
+let order_of_colors = ['_red', '_orange', '_yellow', '_green', '_cyan', '_blue', '_violet'];
 
 show_currentAlgo();
 
@@ -44,7 +45,7 @@ show_fruits();
 // ----------------------------------
 
 function show_fruits() {
-  show(fruits);
+  display(fruits);
 }
 
 function act_shuffle() {
@@ -58,12 +59,40 @@ function act_restore() {
 }
 
 function act_filter_apply() {
-  // TODO
-  fruits = known_fruits.slice().filter((e) => {
-    return e.weight > 3 && e.weight < 15;
-  });
+  let min = document.querySelector('#filter_min_val').value.trim();
+  let max = document.querySelector('#filter_max_val').value.trim();
 
-  show_fruits();
+  let values = tryGetFilterValues(min, max);
+  if (values && values.length > 0) {
+    fruits = known_fruits.slice().filter((e) => {
+      return e.weight >= values[0] && e.weight <= values[1];
+    });
+  
+    show_fruits();
+  }
+}
+
+function tryGetFilterValues(raw_min, raw_max) {
+  let min = parseInt(raw_min);
+  let max = parseInt(raw_max);
+
+  if (raw_min ==='' || raw_max === '') {
+    alert('Не указано значение фильтра');
+    return;
+  }
+
+  if (isNaN(min) || isNaN(max)) {
+    alert(`Некорректное значение фильтра: '${raw_min}' - '${raw_max}'`);
+    return;
+  }
+
+  if (min > max) {
+    const tmp = min;
+    min = max;
+    max = tmp;
+  }
+
+  return [min, max];
 }
 
 function act_filter_clear() {
@@ -74,7 +103,9 @@ const comparation = (fruit1, fruit2) => {
   if (fruit1.color === fruit2.color) {
     return fruit1.weight > fruit2.weight;
   } else { 
-    return fruit1.color > fruit2.color;
+    let idx1 = order_of_colors.indexOf(getColorClass(fruit1.color));
+    let idx2 = order_of_colors.indexOf(getColorClass(fruit2.color));
+    return idx1 > idx2;
   }
 };
 
@@ -102,11 +133,55 @@ function show_currentAlgo() {
 }
 
 function act_add() {
-  let rnd = getRandomItem(known_fruits);
-  fruits.push(rnd);
+  let raw_kind = document.querySelector('#fruit_kind').value.trim();
+  let raw_color = document.querySelector('#fruit_color').value.trim();
+  let raw_weight = document.querySelector('#fruit_weight').value.trim();
 
-  show_fruits();
+  let values = tryGetFruitValues(raw_kind, raw_color, raw_weight);
+
+  if (values && values.length > 0) {
+    let fru = new Fruit();
+    fru.kind = values[0];
+    fru.color = values[1];
+    fru.weight = values[2];
+  
+    fruits.push(fru);
+    
+    show_fruits();
+  }
 }
+
+function tryGetFruitValues(raw_kind, raw_color, raw_weight) {
+  let weight = parseInt(raw_weight);
+
+  if (raw_kind === '') {
+    alert('Укажите название фрукта');
+    return;
+  }
+
+  if (raw_color === '') {
+    alert('Укажите цвет фрукта');
+    return;
+  }
+
+  if (raw_weight === '') {
+    alert('Укажите вес фрукта');
+    return;
+  }
+
+  if (isNaN(weight)) {
+    alert(`Некорректный вес: '${raw_weight}'`);
+    return;
+  }
+
+  if (!getColorClass(raw_color)) {
+    alert('Неизвестный цвет');
+    return;
+  }
+
+  return [raw_kind, raw_color, weight];
+}
+
 
 function act_add_hybrid() {
   let rnd1 = getRandomItem(known_fruits);
@@ -123,7 +198,7 @@ function getRandomItem(items) {
   return items[Math.round(Math.random() * (items.length - 1))];
 }
 
-function show(fruits) {
+function display(fruits) {
 
   const card_list = document.querySelector(".card-list");
 

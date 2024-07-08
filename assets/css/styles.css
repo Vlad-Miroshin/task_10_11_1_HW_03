@@ -1,6 +1,7 @@
 :root {
     --main-font-family: "Roboto", sans-serif;
     --main-font-size: 16px;
+    --main-font-color: #ffffffc2;
     --main-color-gray: #636b6f;
     --button-inactive-color: rgb(215, 247, 219);
     --button-active-color: rgb(180, 245, 188);
@@ -94,6 +95,7 @@ header h1 {
 
 .item .sub-menu {
     background: #262627;
+    padding-top: 10px;
     display: none;
 }
 
@@ -101,8 +103,16 @@ header h1 {
     line-height: 30px;
 }
 
+/* .item .sub-menu .sub-item {
+    line-height: 30px;
+} */
+
 .item .sub-menu div {
     padding-left: 40px;
+}
+
+.item .sub-menu .input__box {
+    padding-left: 0px;
 }
 
 .item .sub-menu a {
@@ -114,9 +124,59 @@ header h1 {
 }
 
 .sort-algo {
-    font-size: .75rem;
+    font-size: .85rem;
     padding: 20px 0 20px 0;
+    /* background: #353536; */
 }
+
+
+
+.input__box {
+    position: relative;
+    padding: 10px 0;
+}
+
+input:-webkit-autofill,
+input:-webkit-autofill:focus {
+  transition: background-color 0s 600000s, color 0s 600000s !important;
+}
+
+.input__box input {
+    width: 80%;
+    padding: 10px 0;
+    margin-bottom: 20px;
+    border: none;
+    border-bottom: 1px solid var(--main-font-color);
+    outline: none;
+    background: transparent;
+    color: var(--main-font-color);
+}
+
+.input__box label {
+    position: absolute;
+    top: 0;
+    left: 0;
+    padding: 10px 0;
+    pointer-events: none;
+    transition: .5s;
+}
+
+.input__box input:focus ~ label,
+.input__box input:valid ~ label {
+    top: -1rem;
+    left: 0;
+    /* color: #03e9f4; */
+    font-size: .75rem;
+}
+
+
+
+
+
+
+
+
+
 
 .footer {
     /* padding-top: 4rem; */
