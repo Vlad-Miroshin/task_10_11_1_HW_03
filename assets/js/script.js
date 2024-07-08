@@ -19,6 +19,7 @@ document.addEventListener('DOMContentLoaded', ()=> {
   onclick('#act-add', () => act_add());
   onclick('#act-add-hybrid', () => act_add_hybrid());
   onclick('#act-change-algo', () => act_change_algo());
+  onclick('#modal-close-btn', () => act_modal_close());
   
 });
 
@@ -28,6 +29,24 @@ sub_btn.forEach((btn)=>{
         this.querySelector('.dropdown').classList.toggle('rotate');
     });
 });
+
+window.addEventListener('keydown', (e)=> {
+  if (e.key === 'Escape') {
+    close_modal();
+  }
+});
+
+document.querySelector('#modal-window .modal__box').addEventListener('click', e => {
+  e._isClickWithInModal = true; 
+});
+
+document.querySelector('#modal-window').addEventListener('click', e => {
+  if (e._isClickWithInModal)
+    return;
+  else
+    close_modal();
+});
+
 
 
 const known_fruits = await parser("./assets/js/data.json");
@@ -59,32 +78,17 @@ function act_restore() {
 }
 
 function act_filter_apply() {
-  let min = document.querySelector('#filter_min_val').value.trim();
-  let max = document.querySelector('#filter_max_val').value.trim();
+  let raw_min = document.querySelector('#filter_min_val').value.trim();
+  let raw_max = document.querySelector('#filter_max_val').value.trim();
 
-  let values = tryGetFilterValues(min, max);
-  if (values && values.length > 0) {
-    fruits = known_fruits.slice().filter((e) => {
-      return e.weight >= values[0] && e.weight <= values[1];
-    });
-  
-    show_fruits();
+  const err = checkFilterValues(raw_min, raw_max);
+  if (err && err.length > 0) {
+    open_modal(err);
+    return;
   }
-}
 
-function tryGetFilterValues(raw_min, raw_max) {
   let min = parseInt(raw_min);
   let max = parseInt(raw_max);
-
-  if (raw_min ==='' || raw_max === '') {
-    alert('Не указано значение фильтра');
-    return;
-  }
-
-  if (isNaN(min) || isNaN(max)) {
-    alert(`Некорректное значение фильтра: '${raw_min}' - '${raw_max}'`);
-    return;
-  }
 
   if (min > max) {
     const tmp = min;
@@ -92,7 +96,32 @@ function tryGetFilterValues(raw_min, raw_max) {
     max = tmp;
   }
 
-  return [min, max];
+  fruits = known_fruits.slice().filter((e) => {
+    return e.weight >= min && e.weight <= max;
+  });
+  
+  show_fruits();
+}
+
+function checkFilterValues(raw_min, raw_max) {
+  const violations = [];
+
+  if (raw_min ==='' || raw_max === '') {
+    violations.push('Не указано значение фильтра');
+  }
+
+  let min = parseInt(raw_min);
+  let max = parseInt(raw_max);
+
+  if (raw_min !== '' && isNaN(min)) {
+    violations.push(`Некорректное значение фильтра: '${raw_min}'`);
+  }
+
+  if (raw_min !== '' && isNaN(max)) {
+    violations.push(`Некорректное значение фильтра: '${raw_max}'`);
+  }
+
+  return violations;
 }
 
 function act_filter_clear() {
@@ -137,51 +166,49 @@ function act_add() {
   let raw_color = document.querySelector('#fruit_color').value.trim();
   let raw_weight = document.querySelector('#fruit_weight').value.trim();
 
-  let values = tryGetFruitValues(raw_kind, raw_color, raw_weight);
-
-  if (values && values.length > 0) {
-    let fru = new Fruit();
-    fru.kind = values[0];
-    fru.color = values[1];
-    fru.weight = values[2];
-  
-    fruits.push(fru);
-    
-    show_fruits();
+  let err = checkFruitValues(raw_kind, raw_color, raw_weight);
+  if (err && err.length > 0) {
+    open_modal(err);
+    return;
   }
+
+  let fru = new Fruit();
+  fru.kind = raw_kind;
+  fru.color = raw_color;
+  fru.weight = parseInt(raw_weight);
+
+  fruits.push(fru);
+  
+  show_fruits();
 }
 
-function tryGetFruitValues(raw_kind, raw_color, raw_weight) {
+function checkFruitValues(raw_kind, raw_color, raw_weight) {
+  const violations = [];
+
   let weight = parseInt(raw_weight);
 
   if (raw_kind === '') {
-    alert('Укажите название фрукта');
-    return;
+    violations.push('Укажите название фрукта');
   }
 
   if (raw_color === '') {
-    alert('Укажите цвет фрукта');
-    return;
+    violations.push('Укажите цвет фрукта');
   }
 
   if (raw_weight === '') {
-    alert('Укажите вес фрукта');
-    return;
+    violations.push('Укажите вес фрукта');
   }
 
-  if (isNaN(weight)) {
-    alert(`Некорректный вес: '${raw_weight}'`);
-    return;
+  if (raw_weight !== '' && isNaN(weight)) {
+    violations.push(`Некорректный вес: '${raw_weight}'`);
   }
 
-  if (!getColorClass(raw_color)) {
-    alert('Неизвестный цвет');
-    return;
+  if (raw_weight !== '' && !getColorClass(raw_color)) {
+    violations.push(`Неизвестный цвет: '${raw_color}'`);
   }
 
-  return [raw_kind, raw_color, weight];
+  return violations;
 }
-
 
 function act_add_hybrid() {
   let rnd1 = getRandomItem(known_fruits);
@@ -265,5 +292,31 @@ function toggle_display(elem) {
         elem.style.display = 'block';
     else 
         elem.style.display = 'none';
+}
+
+function open_modal(err) {
+  const err_list = document.querySelector('#modal-errlist');
+
+  while (err_list.firstChild) {
+    err_list.removeChild(err_list.lastChild);
+  };
+
+  for (let i = 0; i < err.length; i++) {
+
+    const li_err = document.createElement("li");
+    li_err.innerHTML = err[i];
+    
+    err_list.appendChild(li_err);
+  }
+
+  document.querySelector('#modal-window').classList.add('open');
+}
+
+function close_modal() {
+  document.querySelector('#modal-window').classList.remove('open');
+}
+
+function act_modal_close() {
+  close_modal();
 }
 
