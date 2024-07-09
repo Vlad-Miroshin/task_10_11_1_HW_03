@@ -106,7 +106,7 @@ function act_filter_apply() {
 function checkFilterValues(raw_min, raw_max) {
   const violations = [];
 
-  if (raw_min ==='' || raw_max === '') {
+  if (raw_min === '' || raw_max === '') {
     violations.push('Не указано значение фильтра');
   }
 
@@ -117,7 +117,7 @@ function checkFilterValues(raw_min, raw_max) {
     violations.push(`Некорректное значение фильтра: '${raw_min}'`);
   }
 
-  if (raw_min !== '' && isNaN(max)) {
+  if (raw_max !== '' && isNaN(max)) {
     violations.push(`Некорректное значение фильтра: '${raw_max}'`);
   }
 
