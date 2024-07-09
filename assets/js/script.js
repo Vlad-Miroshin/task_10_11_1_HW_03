@@ -203,7 +203,7 @@ function checkFruitValues(raw_kind, raw_color, raw_weight) {
     violations.push(`Некорректный вес: '${raw_weight}'`);
   }
 
-  if (raw_weight !== '' && !getColorClass(raw_color)) {
+  if (raw_color !== '' && !getColorClass(raw_color)) {
     violations.push(`Неизвестный цвет: '${raw_color}'`);
   }
 
